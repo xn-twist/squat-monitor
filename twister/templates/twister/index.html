@@ -1,0 +1,14 @@
+<h1>Twist</h1>
+
+
+Hello {{ request.user.username }}
+
+{% if recent_domains %}
+    <ul>
+    {% for domain in recent_domains %}
+        <li>{{ domain }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No domains are available.</p>
+{% endif %}
