@@ -6,5 +6,5 @@ app_name = 'twister'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^twist/$', views.TwistView.as_view(), name='twist'),
-    url(r'^domain/(?P<pk>.*)/$', views.DomainView.as_view(), name='domain'),
+    url(r'^domain/(?P<pk>.+)/$', views.DomainView.as_view(), name='domain'),
 ]

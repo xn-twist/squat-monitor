@@ -1,14 +1,37 @@
 <h1>Twist</h1>
 
-
-Hello {{ request.user.username }}
-
+<!-- Here are the domains you've recently spun:
 {% if recent_domains %}
     <ul>
     {% for domain in recent_domains %}
-        <li>{{ domain }}</li>
+        <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> <i>(last spun on {{ domain.date_spun }})</i></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No domains are available.</p>
+{% endif %}
+ -->
+{% if user.id == None %}
+    You're not logged in. Please <a href="/user/login">login</a>
+{% else %}
+    Welcome {{ user | title }}!
+
+    <br><br>
+
+    Here are the domains you've recently spun:
+    {% if recent_domains %}
+        <ul>
+        {% for domain in recent_domains %}
+            <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> <i>(last spun on {{ domain.date_spun }})</i></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No domains are available.</p>
+    {% endif %}
+
+    <br><br>
+
+    <a href="/twister/twist">Twist a Domain</a>
+    <br><br><br>
+    <a href="/user/logout">Logout</a>
 {% endif %}

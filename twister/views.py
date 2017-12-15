@@ -1,5 +1,8 @@
+import json
+
 from django.views import generic
 from django.urls import reverse_lazy
+from xn_twist import XNTwist
 
 from .models import Domain
 
@@ -10,10 +13,15 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return recently twisted domains."""
-        # create a list of the most recent domains
-        recent_domains = [domain for domain in Domain.objects.all()]
-        # reverse the list of recent domains
-        recent_domains.reverse()
+        if str(self.request.user) != 'AnonymousUser':
+            recent_domains = [domain for domain in Domain.objects.filter(users__in=[self.request.user])]
+            # create a list of the most recent domains
+            # recent_domains = [domain for domain in Domain.objects.all()]
+            # reverse the list of recent domains
+            recent_domains.reverse()
+        else:
+            recent_domains = None
+
         return recent_domains
 
 
@@ -22,7 +30,12 @@ class TwistView(generic.edit.CreateView):
     fields = ['domain_name']
 
     def get_success_url(self):
-        return reverse_lazy('twister:domain', args=(self.object.domain_name,))
+        # record the user who created the domain
+        self.object.users.add(self.request.user)
+        # twist the domain
+        xn = XNTwist()
+        self.object.spun_data = json.JSONEncoder().encode(xn.twist(self.object.domain_name))
+        return reverse_lazy('twister:domain', args=(self.object.id,))
 
 
 class DomainView(generic.DetailView):
