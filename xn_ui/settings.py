@@ -1,14 +1,3 @@
-"""
-Django settings for xn_ui project on Heroku. For more info, see:
-https://github.com/heroku/heroku-django-template
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.11/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.11/ref/settings/
-"""
-
 import os
 # import dj_database_url
 
@@ -88,12 +77,11 @@ WSGI_APPLICATION = 'xn_ui.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'xnui',
-        'USER': 'twister',
-        'PASSWORD': '1234567',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
