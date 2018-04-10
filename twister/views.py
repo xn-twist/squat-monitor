@@ -34,7 +34,8 @@ class TwistView(generic.edit.CreateView):
         self.object.users.add(self.request.user)
         # twist the domain
         xn = XNTwist()
-        self.object.spun_data = json.JSONEncoder().encode(xn.twist(self.object.domain_name))
+        self.object.spun_data = xn.twist(self.object.domain_name, limit=3)
+        self.object.save()
         return reverse_lazy('twister:domain', args=(self.object.id,))
 
 

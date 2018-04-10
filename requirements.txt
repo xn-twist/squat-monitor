@@ -3,5 +3,5 @@ Django==1.11.1
 gunicorn==19.6.0
 psycopg2
 whitenoise==3.2
-xn-twist
-xn-twist-python-sdk
+xn-twist==1.3.0
+xn-twist-python-sdk==4.0.2

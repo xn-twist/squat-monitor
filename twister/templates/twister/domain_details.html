@@ -4,7 +4,15 @@
 
 <br><br>
 
-{{ domain.spun_data }}
+Found {{ domain.spun_data.count }} squats.
+
+<br><br>
+
+{% for possible_squat in domain.spun_data.possible_squats %}
+    <li>
+        {{ possible_squat.displayed }} ({{ possible_squat.punycode }})
+    </li>
+{% endfor %}
 
 <br><br>
 
