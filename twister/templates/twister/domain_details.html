@@ -1,6 +1,6 @@
-<h2>Domain Details</h2>
+<h2>XNTwist Results for {{ domain }}</h2>
 
-<b>{{ domain }}</b> <i>(last spun on {{ domain.date_spun }})</i>
+<i>{{ domain.date_spun }}</i>
 
 <br><br>
 
@@ -16,4 +16,4 @@ Found {{ domain.spun_data.count }} squats.
 
 <br><br>
 
-<a href="/twister">Return to Main Page</a>
+<a href="{% url 'twister:index' %}">Return to Main Page</a>

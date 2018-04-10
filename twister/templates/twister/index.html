@@ -1,7 +1,7 @@
-<h1>Twist</h1>
+<h1>XNTwist</h1>
 
 {% if user.id == None %}
-    You're not logged in. Please <a href="/user/login">login</a>.
+    You're not logged in. Please <a href="{% url 'register:login' %}">login</a>.
 {% else %}
     Welcome {{ user | title }}!
 
@@ -11,16 +11,13 @@
         Here are the domains you've recently spun:
         <ul>
         {% for domain in recent_domains %}
-            <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> <i>(last spun on {{ domain.date_spun }})</i></li>
+            <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> - <i>{{ domain.date_spun|timesince }} ago</i></li>
         {% endfor %}
         </ul>
+
+        <br><br><br>
+        <a href="{% url 'twister:twist' %}">Twist another domain</a> &nbsp;|&nbsp; <a href="{% url 'register:logout' %}">Logout</a>
     {% else %}
-        <p>You haven't spun any domains yet. Get started by <a href="{% url 'twister:twist' %}">twisting a domain</a>.</p>
+        <p>Get started by <a href="{% url 'twister:twist' %}">twisting a domain</a>.</p>
     {% endif %}
-
-    <br><br>
-
-    <a href="{% url 'twister:twist' %}">Twist a Domain</a>
-    <br><br><br>
-    <a href="{% url 'register:logout' %}">Logout</a>
 {% endif %}

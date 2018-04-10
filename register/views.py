@@ -6,7 +6,7 @@ from .forms import RegistrationForm
 
 
 class Index(generic.TemplateView):
-    template_name = 'register/index.html'
+    template_name = 'register/login.html'
 
 
 class Registration(generic.View):
