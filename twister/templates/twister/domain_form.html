@@ -1,10 +1,6 @@
-{% if user.id == None %}
-    You're not logged in. Please <a href="{% url 'register:login' %}">login</a>.
-{% else %}
-    <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Twist" />
-    </form>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Twist" />
+</form>
 
-    <a href="{% url 'twister:index' %}">Return to Main Page</a>
-{% endif %}
+<a href="{% url 'twister:index' %}">Return to Main Page</a>

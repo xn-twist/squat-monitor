@@ -1,5 +1,7 @@
-import json
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from xn_twist import XNTwist
@@ -7,7 +9,8 @@ from xn_twist import XNTwist
 from .models import Domain
 
 
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView):
+    login_url = '/'
     template_name = 'twister/index.html'
     context_object_name = 'recent_domains'
 
@@ -25,7 +28,8 @@ class IndexView(generic.ListView):
         return recent_domains
 
 
-class TwistView(generic.edit.CreateView):
+class TwistView(LoginRequiredMixin, generic.edit.CreateView):
+    login_url = '/'
     model = Domain
     fields = ['domain_name']
 
@@ -39,7 +43,8 @@ class TwistView(generic.edit.CreateView):
         return reverse_lazy('twister:domain', args=(self.object.id,))
 
 
-class DomainView(generic.DetailView):
+class DomainView(LoginRequiredMixin, generic.DetailView):
+    login_url = '/'
     model = Domain
     template_name = 'twister/domain_details.html'
 

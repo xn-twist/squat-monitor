@@ -1,23 +1,19 @@
 <h1>XNTwist</h1>
 
-{% if user.id == None %}
-    You're not logged in. Please <a href="{% url 'register:login' %}">login</a>.
+Welcome {{ user | title }}!
+
+<br><br>
+
+{% if recent_domains %}
+    Here are the domains you've recently spun:
+    <ul>
+    {% for domain in recent_domains %}
+        <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> - <i>{{ domain.date_spun|timesince }} ago</i></li>
+    {% endfor %}
+    </ul>
+
+    <br><br><br>
+    <a href="{% url 'twister:twist' %}">Twist another domain</a> &nbsp;|&nbsp; <a href="{% url 'register:logout' %}">Logout</a>
 {% else %}
-    Welcome {{ user | title }}!
-
-    <br><br>
-
-    {% if recent_domains %}
-        Here are the domains you've recently spun:
-        <ul>
-        {% for domain in recent_domains %}
-            <li><a href="{% url 'twister:domain' domain.id %}">{{ domain }}</a> - <i>{{ domain.date_spun|timesince }} ago</i></li>
-        {% endfor %}
-        </ul>
-
-        <br><br><br>
-        <a href="{% url 'twister:twist' %}">Twist another domain</a> &nbsp;|&nbsp; <a href="{% url 'register:logout' %}">Logout</a>
-    {% else %}
-        <p>Get started by <a href="{% url 'twister:twist' %}">twisting a domain</a>.</p>
-    {% endif %}
+    <p>Get started by <a href="{% url 'twister:twist' %}">twisting a domain</a>.</p>
 {% endif %}
