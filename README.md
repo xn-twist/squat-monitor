@@ -1,5 +1,7 @@
 # Heroku Django Starter Template
 
+**NOTE:** This project is deprecated and archived.
+
 An utterly fantastic project starter template for Django 1.11.
 
 ## Features
